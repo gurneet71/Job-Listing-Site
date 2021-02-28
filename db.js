@@ -1,7 +1,7 @@
 // const config = require("./config");
 const MongoClient = require("mongodb");
 const valid= require("./jobs");
-const uri =`mongodb+srv://${config.name}:${config.pass}@cluster0.kojr7.mongodb.net?retryWrites=true&w=majority`;
+const uri =`mongodb+srv://${process.env.name}:${process.env.pass}@cluster0.kojr7.mongodb.net?retryWrites=true&w=majority`;
 exports.dbConnect = function(){
     
     MongoClient.connect(uri,{ useNewUrlParser: true , useUnifiedTopology: true },function(err,client){

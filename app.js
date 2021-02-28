@@ -1,6 +1,6 @@
-// if (process.env.NODE_ENV !== "production") {
-//     require('dotenv').config();
-// }
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
 
 const express = require('express'),
     app = express(),
@@ -23,8 +23,8 @@ const express = require('express'),
     bcrypt = require("bcrypt");
 
 const store = MongoStore.create({
-    mongoUrl: `mongodb+srv://${config.name}:${config.pass}@cluster0.kojr7.mongodb.net?retryWrites=true&w=majority`,
-    secret: config.sessionSecret,
+    mongoUrl: `mongodb+srv://${process.env.name}:${process.env.pass}@cluster0.kojr7.mongodb.net?retryWrites=true&w=majority`,
+    secret: process.env.sessionSecret,
     touchAfter: 24 * 60 * 60
 });
 
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(morgan('common'));
-app.use(session({store,secret:config.secret ,saveUninitialized: true, resave: true}))
+app.use(session({store,secret:process.env.secret ,saveUninitialized: true, resave: true}))
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -273,7 +273,7 @@ app.use(function(err,req,res,next){
     }
     res.status(status).send(`${name}:${message}`);
 })
-const port = config.port || 3000;
+const port = process.env.port || 3000;
 app.listen(port ,function(){
     console.log('Listening at port 3000');
     db.dbConnect();
