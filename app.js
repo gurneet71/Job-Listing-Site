@@ -273,8 +273,8 @@ app.use(function(err,req,res,next){
     }
     res.status(status).send(`${name}:${message}`);
 })
-const port = process.env.port || 3000;
-app.listen(port ,function(){
+const PORT = process.env.PORT || 3000;
+app.listen(PORT ,function(){
     console.log('Listening at port 3000');
     db.dbConnect();
 })
