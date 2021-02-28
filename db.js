@@ -1,4 +1,4 @@
-const config = require("./config");
+// const config = require("./config");
 const MongoClient = require("mongodb");
 const valid= require("./jobs");
 const uri =`mongodb+srv://${config.name}:${config.pass}@cluster0.kojr7.mongodb.net?retryWrites=true&w=majority`;

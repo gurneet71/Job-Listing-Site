@@ -1,3 +1,7 @@
+// if (process.env.NODE_ENV !== "production") {
+//     require('dotenv').config();
+// }
+
 const express = require('express'),
     app = express(),
     path = require('path'),
@@ -13,7 +17,7 @@ const express = require('express'),
     db = require("./db"),
     session = require("express-session"),
     MongoStore = require('connect-mongo').default,
-    config = require("./config"),
+    // config = require("./config"),
     passport = require('passport'),
     LocalStrategy = require('passport-local')
     bcrypt = require("bcrypt");
@@ -270,7 +274,7 @@ app.use(function(err,req,res,next){
     res.status(status).send(`${name}:${message}`);
 })
 const port = config.port || 3000;
-app.listen(port,function(){
+app.listen(port ,function(){
     console.log('Listening at port 3000');
     db.dbConnect();
 })
