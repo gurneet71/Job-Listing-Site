@@ -1,0 +1,25 @@
+<nav class='flex justify-between px-16 py-4 bg-gray-800 items-center'>
+    
+    <div class="left">
+        <div>
+            <p>JOB LISTING SITE</p>
+        </div>
+        
+        <div class="hamburger">
+            <img src="/menu.png" alt="menu">
+        </div>
+    </div>
+    
+    <ul class='flex nav-items'>
+        <% if(user && user.userType == "Employer") { %>
+            <li class='px-4'><a href="/jobs/new">New job</a></li>
+        <% } %> 
+        <li class='px-4'><a href="/jobs">All Jobs</a></li>
+        <li class='px-4'>Contact</li>
+        <% if(user) {%>
+            <li class='px-4'><a href="/logOut">LogOut</a></li>
+        <% } else{%>  
+            <li class='px-4'><a href="/signIn">Log In/SignUp</a></li>
+        <% } %> 
+    </ul>
+</nav>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('./partials/header'); %>
+</head>
+<style>
+    @media(max-width:910px){
+        form{
+            padding:1rem;
+        }
+    }
+    @media(max-width:780px){
+        form{
+            flex-direction: column;
+        }
+
+        form>div{
+            width:100%;
+        }
+    }
+</style>
+<body class="overflow-y-auto">
+    <%- include('./partials/navbar'); %>
+    <div class='form-container'>
+        <form action="/jobs" method="POST">
+            <div>
+                <label for="name">Enter company name</label>
+                <input type="text" name="name" id="name" placeholder="Enter company name" required>
+            </div>
+    
+            <div>
+                <label for="experience">Enter experience</label>
+                <input type="number" name="experience" id="experience" min="0" required>
+            </div>
+            
+            <div>
+                <label for="qualification">Enter qualification</label>
+                <select name="qualification" id="qualification">
+                    <option value="secondary-school">secondary-school</option>
+                    <option value="bachelors">bachelors</option>
+                    <option value="masters">masters</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="post">Enter Post</label>
+                <input type="text" name="post" id="post" required>
+            </div>
+            
+            <div>
+                <label for="country">Enter country</label>
+                <input type="text" name="country" id="country" required>
+            </div>
+            
+            <div>
+                <label for="city">Enter city</label>
+                <input type="text" name="city" id="city" required>
+            </div>
+            
+            <div>
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="60" rows="10" required></textarea>
+            </div>
+            
+    
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script src="/navscript.js"></script>
+    <script>
+        const exp = document.getElementById('experience');
+        const post = document.getElementById('post');
+        const country = document.getElementById('country');
+        const city = document.getElementById('city');
+        const description = document.getElementById('descritpion');
+        const form = document.getElementsByTagName('form')[0];
+        const name = document.getELementById('name');
+        
+        form.addEventListener('submit',function(){
+            if(name.value == '' || exp.value == '' || post.value == '' || country.value == '' || city.value == '' || description.value == '' ){
+                return false;
+            }
+            
+           
+        })
+
+    </script>
+    
+</body>
+</html>

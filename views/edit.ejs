@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('./partials/header'); %>
+</head>
+<style>
+    @media(max-width:700px){
+    
+        form,.heading{
+            padding:1rem;
+        }
+    }
+</style>
+<body class="overflow-y-auto">
+    <%- include('./partials/navbar'); %>
+    <div class="heading">
+        <h1 class=' text-5xl p-0'><%= val.name %> </h1>
+    </div>
+    
+    <form action="/jobs/<%= id %>"  method="post">
+        <label for="experience">Enter experience</label>
+        <input type="number" name="experience" id="experience" value=<%= val.experience %> min ="0" required>
+        
+        <br>
+        <label for="qualification">Enter qualification</label>
+        <select name="qualification" id="qualification" value=<%= val.qualification %>>
+            <option value="secondary-school">secondary-school</option>
+            <option value="bachelors">bachelors</option>
+            <option value="masters">masters</option>
+        </select>
+    
+        <br>
+        <label for="post">Enter post</label>
+        <input type="text" name="post" id="post" value="<%= val.post %>" required>
+        
+        <br>
+        <label for="country">Enter country</label>
+        <input type="text" name="country" id="country" value=<%= val.location.country %> required>
+        
+        <br>
+        <label for="city">Enter city</label>
+        <input type="text" name="city" id="city" value="<%= val.location.city %>" required>
+        
+        <label for="description">Description</label>
+        <textarea name="description" id="description" cols="30" rows="10" required><%=val.description%></textarea>
+        
+
+        <input type="submit" value="Submit" id='submit-btn'>
+    </form>
+    <script src="/navscript.js"></script>
+    <script>
+        const exp = document.getElementById('experience');
+        const post = document.getElementById('post');
+        const country = document.getElementById('country');
+        const city = document.getElementById('city');
+        const description = document.getElementById('descritpion');
+        const submitBtn = document.getElementById('submit-btn');
+        const form = document.getElementsByTagName('form')[0];
+        
+        form.addEventListener('submit',function(){
+            if(exp.value == '' ){
+                return false;
+            }
+            if(post.value == '' ){
+                return false;
+            }
+            if(country.value == '' ){
+                return false;
+            }
+            if(city.value == '' ){
+                return false;
+            }
+            if(description.value == '' ){
+                return false;
+            }
+           
+        })
+
+    </script>
+</body>
+</html>

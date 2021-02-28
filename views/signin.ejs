@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignIn</title>
+    <%- include('./partials/header'); %>
+    
+    <style>
+        body{
+            overflow:hidden !important;
+        }
+        .container{
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            height:calc(100vh - 56px);
+            width:100vw;
+            max-width:100%;
+        }
+
+        .container h1{
+            margin:0 auto;
+            padding:0 1rem;
+            width:80%;
+            font-size:2rem;
+            font-weight: 800;
+        }
+
+        form{
+            padding:1rem;
+        }
+        input{
+            margin:0.2rem 0;
+        }
+
+        .sign-in,.sign-up{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .sign-in{
+            background:#1f2937;
+            color:#fff;
+        }
+
+        .sign-in input[type="submit"]{
+            border: 1px solid #fff;
+        }
+
+        .sign-in input[type="text"],input[type="password"],select{
+            color:black;
+        }
+
+    
+
+        @media(max-width:750px){
+            .sign-in{
+                display:none;
+            }
+            
+
+            .select{
+                display: flex;
+                width:100%;
+                justify-content: space-around;
+                align-items: stretch;
+                
+            }
+
+            .select>div{
+                border:1px solid #babbbb57 ;
+                width:50%;
+                text-align: center;
+                padding:1.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/navbar'); %>
+    <div class="select">
+        <div class="select-signUp">
+            <h2>Sign Up</h2>
+        </div>
+        <div class="select-logIn">
+            <h2>Log In</h2>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="sign-up">
+            <h1>Sign Up</h1>
+            <form action="/local-reg" method = "POST">
+                <label for="username">Enter Username</label>
+                <input type="text" name="username" id="username">
+
+                <label for="password">Enter Password</label>
+                <input type="password" name="password" id="password">
+
+                <label for="Usertype">Usertype</label>
+                <select name="userType" id="userType">
+                    <option value="Employer">Employer</option>
+                    <option value="Employee">Employee</option>
+                </select>
+
+                <input type="submit" value="Sign-up">
+            </form>
+        </div>
+
+        <div class="sign-in">
+            <h1>Sign In</h1>
+            <form action="/local-login" method = "POST">
+                <label for="username">Enter Username</label>
+                <input type="text" name="username" id="username">
+
+                <label for="password">Enter Password</label>
+                <input type="password" name="password" id="password">
+
+                <label for="Usertype">Usertype</label>
+                <select name="userType" id="userType">
+                    <option value="Employer">Employer</option>
+                    <option value="Employee">Employee</option>
+                </select>
+
+                <input type="submit" value="Sign-In">
+            </form>
+        </div>
+    </div>
+
+    <script src="/navscript.js"></script>
+    <script>
+        var select = document.getElementsByClassName("select")[0];
+        var signupSelect = document.getElementsByClassName("select-signUp")[0];
+        var loginSelect = document.getElementsByClassName("select-logIn")[0];
+        var signupForm = document.getElementsByClassName("sign-up")[0];
+        var loginForm = document.getElementsByClassName("sign-in")[0];
+        console.log(loginForm.style.display);
+        signupSelect.addEventListener("click",function(){
+            if(signupForm.style.display == "none"){
+                signupForm.style.display = "flex";
+                signupForm.style.width = "100%";
+
+                loginForm.style.display = "none";
+            }
+        })
+        if(screen.width > 750){
+            select.classList.add("hidden");
+        }
+        loginSelect.addEventListener("click",function(){
+            if(loginForm.style.display == "none" || loginForm.style.display == ""){
+                signupForm.style.display = "none";
+                loginForm.style.display = "flex";
+                loginForm.style.width = "100%"; 
+            }
+        })
+
+        window.addEventListener("resize",function(){
+            if(screen.width < 750){
+                if(!(signupForm.style.display == "" || signupForm.style.display == "none")){
+                    loginForm.style.display = "none";
+                }
+                
+                // loginForm.style.width = "100%"; 
+                
+            }
+            else if(screen.width > 750){
+                console.log("yes");
+                signupForm.style.display = "flex";
+                loginForm.style.display = "flex";
+                select.classList.add("hidden");
+                
+            }
+        })
+    </script>
+    
+</body>
+</html>

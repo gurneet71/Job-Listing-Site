@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('./partials/header'); %>
+</head>
+<body class="overflow-y-auto">
+    
+    <%- include('./partials/navbar') %>
+    <div class='grid md:grid-cols-3 gap-4 mt-4 mb-12 mx-4 sm:grid-cols-1'>
+        <% result.forEach(function(item){ %>
+          
+            <a href="/jobs/<%= item._id %> " class=' rounded-lg job text-left border-4 border-light-blue-500 border-opacity-100 shadow-sm py-4 pl-4'><%= item.name %> - <%= item.qualification %> </a>
+           
+        <% }) %>  
+    </div>
+           
+    
+
+    <% if(user && user.userType == "Employer") {%> 
+    <a href="/jobs/new" class='text-white rounded-lg px-8 py-4 mx-4 bg-gray-800'>Enter new job details</a>
+    <% } %> 
+
+    <script src="/navscript.js"></script>
+</body>
+</html>

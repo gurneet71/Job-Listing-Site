@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('./partials/header'); %>
+</head>
+<style>
+    .container{
+        max-width:650px;
+        margin:1rem auto;
+        padding:1.5rem 1rem;
+        border:1px solid rgba(223, 216, 216, 0.625);
+        border-radius:8px;
+        box-shadow: 2px 6px 10px -4px rgba(166,154,166,1);
+        background:rgb(252, 252, 252);
+        /* min-width:350px; */
+    }
+
+    span{
+        display:block;
+        font-weight:700;
+    }
+
+    .values > *{
+        margin:0.1rem 0;
+    }
+    .edit{
+        width:100%;
+        padding:0.6rem 1.2rem;
+        margin:0.5rem 2.5%;
+        border-radius : 0.5rem;
+        outline: none;
+        text-transform: uppercase;
+        background :rgba(96, 165, 250,1);;
+        color:#fff;
+        text-align: center;
+        display:block;
+    }
+
+    .disabled-ip{
+        display:block;
+        background:rgb(141, 141, 141)  !important;
+        width:80% !important;
+        margin:1rem auto !important;
+    }
+
+    @media(max-width:720px){
+        .container{
+            width:90%;
+            /* margin:1rem 1.5rem; */
+        }
+    }
+    @media(max-width:470px){
+        form{
+            padding:1rem;
+        }
+    }
+</style>
+<body class="overflow-y-auto">
+    <%- include('./partials/navbar'); %>
+    <div id = 'container' class='container'>
+        <div id="values" class='values'>
+            <h3>Company name : <span><%= val.name %> </span></h3>
+            <h3>Post : <span><%= val.post %></span></h3>
+            <h3>Experience required : <span><%= val.experience %></span> </h3>
+            <h3>Qualification required : <span><%= val.qualification %></span> </h3>
+            <h3>Job Location : <span><%= val.location.country %> - <%= val.location.city %></span> </h3>
+            
+            
+        </div>
+        <p class='col-span-2 my-2'>Job Description: <span><%= val.description %></span>  </p>
+
+    
+        <% if(user && user.user_id == val.creator.id) {%> 
+            <form action="/jobs/<%=val._id%>?_method=DELETE" method="POST" >
+                <a href="/jobs/<%=val._id%>/edit" class='edit'>Edit job details</a>
+                <input type="submit" value="DELETE JOB POST">
+            </form>
+            <div class="px-8 py-4">
+                <h2 class="my-8 text-lg font-semibold">Appliers</h2>
+                <ul class="divide-y divide-gray-300">
+                    <% emp_arr.forEach(function(item){ %>
+                        <li class="py-2"><%= item.username %></li>
+                    <% }) %> 
+                </ul>
+                
+            </div>
+            
+        <% } else if(user && user.userType == "Employee"){%>
+                <% var count = 0 %>
+                <% val.appliers.forEach(function(item){%>
+                    <% if(item.id == user.user_id) { %>
+                        <% count = 1; %>
+                    <% } %> 
+                <%}) %> 
+                <% if(count == 1){ %>
+                    <input type="submit" value="Applied" class="disabled-ip" disabled >
+                    
+                <% } else{%>
+                    <form action="/jobs/<%=val._id%>/apply" method="POST">
+                        <input type="submit" value="Apply">
+                    </form>
+                <% } %> 
+        <% } %>  
+        
+    </div>
+    
+    <script src="/navscript.js"></script>
+</body>
+</html>
