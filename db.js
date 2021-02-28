@@ -5,6 +5,10 @@ const uri =`mongodb+srv://${process.env.name}:${process.env.pass}@cluster0.kojr7
 exports.dbConnect = function(){
     
     MongoClient.connect(uri,{ useNewUrlParser: true , useUnifiedTopology: true },function(err,client){
+        if(err){
+            console.log(uri);
+            console.log(err);
+        }
         console.log("Connected to DB");
         db = client.db('job-listing');
         // db.createCollection('Employer',{validator: userModel},function(err,res){
