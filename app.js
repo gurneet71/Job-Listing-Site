@@ -276,6 +276,5 @@ app.use(function(err,req,res,next){
 const port = process.env.port || 3000;
 app.listen(port ,function(){
     console.log('Listening at port 3000');
-    console.log(process.env.name);
     db.dbConnect();
 })

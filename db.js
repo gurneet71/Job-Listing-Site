@@ -5,8 +5,9 @@ const uri =`mongodb+srv://${process.env.name}:${process.env.pass}@cluster0.kojr7
 exports.dbConnect = function(){
     
     MongoClient.connect(uri,{ useNewUrlParser: true , useUnifiedTopology: true },function(err,client){
+        console.log(process.env.secret);
         if(err){
-            console.log(uri);
+            
             console.log(err);
         }
         console.log("Connected to DB");
