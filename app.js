@@ -269,8 +269,8 @@ app.use(function(err,req,res,next){
     }
     res.status(status).send(`${name}:${message}`);
 })
-
-app.listen('3000',function(){
+const port = config.port || 3000;
+app.listen(port,function(){
     console.log('Listening at port 3000');
     db.dbConnect();
 })
