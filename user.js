@@ -90,9 +90,11 @@ exports.localSignUp = function(username,password,userType){
         }
         else{
             var hash = bcrypt.hashSync(password,10);
-            user = {username:username,password:hash,id:result._id};
-            userCollection.insertOne(user).then(function(){
+            user = {username:username,password:hash};
+            userCollection.insertOne(user).then(function(result){
                 // client.close();
+                const id = result["ops"][0]["_id"];
+                user = {username:username,password:hash,id:id};
                 deferred.resolve(user);
             })
         }

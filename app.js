@@ -65,7 +65,7 @@ passport.use("local-signup",new LocalStrategy(
           if (!user) {
             console.log("COULD NOT LOG IN");
             req.session.error = 'Could not log user in. Please try again.'; //inform user could not log them in
-            return done(null, {user_id:user.id,username:user.username,password:user.password,userType:req.body.userType});
+            return done(null, {user});
           }
         }).fail(function(err){
           console.log(err);
